@@ -1,7 +1,7 @@
 'use strict';
 
-QUnit.module("Тестируем функцию deepMerge", function() {
-    QUnit.test("Работает правильно с вложенными объектами", function(assert) {
+QUnit.module("Тестируем функцию deepMerge", function () {
+    QUnit.test("Работает правильно с вложенными объектами", function (assert) {
         const source = {
             user: {
                 name: "Alice",
@@ -43,7 +43,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result, expected, "Должно работать правильно с вложенными объектами");
     });
 
-    QUnit.test("Работает правильно с невложенными объектами", function(assert) {
+    QUnit.test("Работает правильно с невложенными объектами", function (assert) {
         const source = {
             name: "Алиса",
             age: 25,
@@ -64,7 +64,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result, expected, "Должно правильно перезаписывать ключи");
     });
 
-    QUnit.test("Работает с пустым исходным объектом", function(assert) {
+    QUnit.test("Работает с пустым исходным объектом", function (assert) {
         const source = {
             name: "Алиса",
             age: 25
@@ -81,7 +81,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result, expected, "Должно возвращать исходный объект при отсутствии второго");
     });
 
-    QUnit.test("Работа с null значением в первом объекте", function(assert) {
+    QUnit.test("Работа с null значением в первом объекте", function (assert) {
         const source = null;
 
         const target = {
@@ -98,7 +98,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result, expected, "Должно вернуть второй объект при null первом")
     });
 
-    QUnit.test("Работа с null значением во втором объекте", function(assert) {
+    QUnit.test("Работа с null значением во втором объекте", function (assert) {
         const source = {
             city: "Wonderland",
             zip: 12345,
@@ -117,7 +117,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result, expected, "Должно вернуть первый объект при null втором")
     });
 
-    QUnit.test("Работа с undefined значением в первом объекте", function(assert) {
+    QUnit.test("Работа с undefined значением в первом объекте", function (assert) {
         const source = undefined;
 
         const target = {
@@ -136,7 +136,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result, expected, "Должно вернуть второй объект, когда первый = undefined");
     });
 
-    QUnit.test("Работа с undefined значением во втором объекте", function(assert) {
+    QUnit.test("Работа с undefined значением во втором объекте", function (assert) {
         const source = {
             city: "Анапа",
             country: "Россия"
@@ -153,7 +153,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result, expected, "Должно вернуть первый объект, когда второй = undefined");
     });
 
-    QUnit.test("Работа с null и undefined значениеми в обоих объектах", function(assert) {
+    QUnit.test("Работа с null и undefined значениеми в обоих объектах", function (assert) {
         const source = null;
 
         const target = undefined;
@@ -164,7 +164,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
 
     });
 
-    QUnit.test("Работа с примитивными типами: число", function(assert) {
+    QUnit.test("Работа с примитивными типами: число", function (assert) {
         const source = 42;
 
         const target = {
@@ -179,31 +179,31 @@ QUnit.module("Тестируем функцию deepMerge", function() {
 
         const result = deepMerge(source, target);
         assert.deepEqual(result, expected, "Должно вернуть второй объект, когда первый - число");
-    }); 
+    });
 
-    QUnit.test("Работа с примитивными типами: строка", function(assert) {
+    QUnit.test("Работа с примитивными типами: строка", function (assert) {
         const source = {
             name: "Shana Dale",
-		    phone: "1-936-264-2446",
-		    email: "pretium@icloud.ca",
-		    country: "Chile",
-		    list: 5
+            phone: "1-936-264-2446",
+            email: "pretium@icloud.ca",
+            country: "Chile",
+            list: 5
         };
         const target = "invalid target";
 
         const expected = {
             name: "Shana Dale",
-		    phone: "1-936-264-2446",
-		    email: "pretium@icloud.ca",
-		    country: "Chile",
-		    list: 5
+            phone: "1-936-264-2446",
+            email: "pretium@icloud.ca",
+            country: "Chile",
+            list: 5
         };
 
         const result = deepMerge(source, target);
         assert.deepEqual(result, expected, "Должно вернуть первый объект, когда второй - число");
     });
 
-    QUnit.test("Работа с примитивными типами: boolean", function(assert) {
+    QUnit.test("Работа с примитивными типами: boolean", function (assert) {
         const source = false;
 
         const target = {
@@ -235,7 +235,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
     });
 
 
-    QUnit.test("Работа с примитивными типами: оба объекта - примитивные типы", function(assert) {
+    QUnit.test("Работа с примитивными типами: оба объекта - примитивные типы", function (assert) {
         const source = "nomercy";
 
         const target = 0;
@@ -246,7 +246,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result, expected, "Должно вернуть пустой объект");
     });
 
-    QUnit.test("Работает со специальными объектами разного уровня вложенности: Date", function(assert) {
+    QUnit.test("Работает со специальными объектами разного уровня вложенности: Date", function (assert) {
         const source = {
             registration: new Date('2023-01-01T10:00:00Z'),
             user: {
@@ -270,9 +270,9 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         const expected = {
             registration: target.registration,
             user: {
-                birth: target.user.birth, 
+                birth: target.user.birth,
                 lastPurhase: {
-                    paid: target.user.lastPurhase.paid 
+                    paid: target.user.lastPurhase.paid
                 }
             }
         };
@@ -283,7 +283,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.strictEqual(result.user.lastPurhase.paid, target.user.lastPurhase.paid, "Дальше вложенные Date объекты заменены");
     });
 
-    QUnit.test("Работает со специальными объектами разного уровня вложенности: RegExp", function(assert) {
+    QUnit.test("Работает со специальными объектами разного уровня вложенности: RegExp", function (assert) {
         const source = {
             validation: /^[a-z]+$/,
             user: {
@@ -293,7 +293,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
                 }
             }
         };
-    
+
         const target = {
             validation: /^[a-z0-9]+$/,
             user: {
@@ -303,24 +303,24 @@ QUnit.module("Тестируем функцию deepMerge", function() {
                 }
             }
         };
-    
+
         const expected = {
             validation: target.validation,
             user: {
-                usernamePattern: target.user.usernamePattern, 
+                usernamePattern: target.user.usernamePattern,
                 security: {
                     passwordRegex: target.user.security.passwordRegex
                 }
             }
         };
-    
+
         const result = deepMerge(source, target);
         assert.strictEqual(result.validation, target.validation, "RegExp объекты верхнего уровня заменены");
         assert.strictEqual(result.user.usernamePattern, target.user.usernamePattern, "Вложенные RegExp объекты заменены");
         assert.strictEqual(result.user.security.passwordRegex, target.user.security.passwordRegex, "Дальше вложенные RegExp объекты заменены");
     });
-    
-    QUnit.test("Работает со смешанными специальными объектами: Date и RegExp", function(assert) {
+
+    QUnit.test("Работает со смешанными специальными объектами: Date и RegExp", function (assert) {
         const source = {
             createdAt: new Date('2023-06-01T00:00:00Z'),
             validation: /^[a-z]+@[a-z]+\.[a-z]+$/,
@@ -332,7 +332,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
                 }
             }
         };
-    
+
         const target = {
             createdAt: new Date('2024-06-01T00:00:00Z'),
             validation: /^[a-z0-9]+@[a-z0-9]+\.[a-z]+$/,
@@ -344,7 +344,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
                 }
             }
         };
-    
+
         const expected = {
             createdAt: target.createdAt,
             validation: target.validation,
@@ -356,16 +356,16 @@ QUnit.module("Тестируем функцию deepMerge", function() {
                 }
             }
         };
-    
+
         const result = deepMerge(source, target);
-        
+
         assert.strictEqual(result.createdAt, target.createdAt, "Date объекты заменены");
         assert.strictEqual(result.settings.startDate, target.settings.startDate, "Вложенные Date объекты заменены");
         assert.strictEqual(result.validation, target.validation, "RegExp объекты заменены");
         assert.strictEqual(result.settings.patterns.validation, target.settings.patterns.validation, "Вложенные RegExp объекты заменены");
     });
 
-    QUnit.test("Работает с пустыми объектами", function(assert) {
+    QUnit.test("Работает с пустыми объектами", function (assert) {
         const source1 = {};
         const target1 = {};
         const expected1 = {};
@@ -373,7 +373,7 @@ QUnit.module("Тестируем функцию deepMerge", function() {
         assert.deepEqual(result1, expected1, "Два пустых объекта должны возвращать пустой объект")
     });
 
-    QUnit.test("Работает с частично пустыми объектами", function(assert) {
+    QUnit.test("Работает с частично пустыми объектами", function (assert) {
         const source = {
             name: "Алиса",
             age: null,

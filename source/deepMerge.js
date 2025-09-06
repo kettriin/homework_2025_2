@@ -14,7 +14,7 @@ const deepMerge = (obj1, obj2) => {
   if (typeof obj1 !== 'object' || obj1 === null) {
     obj1 = {};
   }
-  
+
   if (typeof obj2 !== 'object' || obj2 === null) {
     obj2 = {};
   }
