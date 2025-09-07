@@ -234,7 +234,6 @@ QUnit.module("Тестируем функцию deepMerge", function () {
         assert.deepEqual(result, expected, "Должно вернуть второй объект, когда первый - boolean");
     });
 
-
     QUnit.test("Работа с примитивными типами: оба объекта - примитивные типы", function (assert) {
         const source = "nomercy";
 

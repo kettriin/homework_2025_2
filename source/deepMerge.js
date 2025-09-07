@@ -11,18 +11,18 @@
  */
 const deepMerge = (obj1, obj2) => {
 
-  if (typeof obj1 !== 'object' || obj1 === null) {
+  if (isObject(obj1) == false) {
     obj1 = {};
   }
 
-  if (typeof obj2 !== 'object' || obj2 === null) {
+  if (isObject(obj2) == false) {
     obj2 = {};
   }
 
   const result = { ...obj1 }; // делаем копию первого объекта как предварительный результат обработки 
 
   for (const key in obj2) { //для каждого ключа из второго объекта
-    const currentValue = result[key]; //смотри какое текущее значение в первом объекте по текущему ключу 
+    const currentValue = result[key]; //смотриv какое текущее значение в первом объекте по текущему ключу 
     const newValue = obj2[key]; //смотрим каким мы хотим его видеть по текущему ключу
 
     // Если оба значения по текущему ключу являются объектами (вынесено в хелпер), то объединяем (рекурсивно самой же deepMerge)
@@ -40,11 +40,25 @@ const deepMerge = (obj1, obj2) => {
 /**
  * Хелпер для проверки, является ли значение объектом
  * @param {any} value значение 
- * @returns {boolean} true если значение - типа объект + не массив + не пустое + исключаем любой другой конструктор, кроме Object (для исключания Data, Regex)
+ * @returns {boolean} true если значение - типа объект + не массив + не пустое + исключаем специальные объекты Date, Regex, Set, Map
  */
-const isObject = value =>
-  typeof value === 'object' &&
-  value !== null &&
-  !Array.isArray(value) &&
-  value.constructor === Object;
+const isObject = value => {
+  if (typeof value !== 'object' || 
+     value === null ||
+      Array.isArray(value)
+    ) {
+    return false;
+  }
+  
+  if (value instanceof Date ||
+      value instanceof RegExp ||
+      value instanceof Map ||
+      value instanceof Set
+    ) {
+    return false;
+  }
+ 
+  return true; //если выше всё гуд, то остальное пропускаем к обработке
+  
+};
 
