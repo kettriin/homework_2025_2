@@ -11,18 +11,18 @@
  */
 const deepMerge = (obj1, obj2) => {
 
-  if (isObject(obj1) == false) {
+  if (!isObject(obj1)) {
     obj1 = {};
   }
 
-  if (isObject(obj2) == false) {
+  if (!isObject(obj2)) {
     obj2 = {};
   }
 
   const result = { ...obj1 }; // делаем копию первого объекта как предварительный результат обработки 
 
   for (const key in obj2) { //для каждого ключа из второго объекта
-    const currentValue = result[key]; //смотриv какое текущее значение в первом объекте по текущему ключу 
+    const currentValue = result[key]; //смотрим какое текущее значение в первом объекте по текущему ключу 
     const newValue = obj2[key]; //смотрим каким мы хотим его видеть по текущему ключу
 
     // Если оба значения по текущему ключу являются объектами (вынесено в хелпер), то объединяем (рекурсивно самой же deepMerge)
