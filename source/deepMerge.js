@@ -23,18 +23,19 @@ const deepMerge = (obj1, obj2) => {
 
   const result = { ...obj1 }; // делаем копию первого объекта как предварительный результат обработки 
 
-  for (const key in obj2) { //для каждого ключа из второго объекта
-    const currentValue = result[key]; //смотрим какое текущее значение в первом объекте по текущему ключу 
+  Object.keys(obj2).reduce((accum, key) => { //для каждого ключа из второго объекта
+    const currentValue = accum[key]; //смотрим какое текущее значение в первом объекте по текущему ключу 
     const newValue = obj2[key]; //смотрим каким мы хотим его видеть по текущему ключу
 
     // Если оба значения по текущему ключу являются объектами (вынесено в хелпер), то объединяем (рекурсивно самой же deepMerge)
     if (isObject(currentValue) && isObject(newValue)) {
-      result[key] = deepMerge(currentValue, newValue);
+      accum[key] = deepMerge(currentValue, newValue);
     } else {
       // если нет, то перезаписываем значением из второго объекта
-      result[key] = newValue;
+      accum[key] = newValue;
     }
-  }
+    return accum;
+  }, result)
 
   return result;
 };
